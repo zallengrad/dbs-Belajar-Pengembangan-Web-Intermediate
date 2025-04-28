@@ -7,7 +7,7 @@ function extractPathnameSegments(pathname) {
   };
 }
 
-function parsePathnameSegments(pathname) {
+export function parsePathnameSegments(pathname) {
   const splitPath = pathname.split('/');
 
   return {
@@ -15,6 +15,7 @@ function parsePathnameSegments(pathname) {
     id: splitPath[2] || null,
   };
 }
+
 
 function constructRouteFromSegments(pathSegments) {
   let pathname = '';
@@ -34,9 +35,22 @@ function getActivePathname() {
   return location.hash.replace('#', '') || '/';
 }
 
+// export function getActiveRoute() {
+//   const pathname = getActivePathname();
+//   const pathSegments = parsePathnameSegments(pathname);
+
+//   return constructRouteFromSegments(pathSegments);
+// }
+
+
 export function getActiveRoute() {
   const pathname = getActivePathname();
   const pathSegments = parsePathnameSegments(pathname);
-
+ 
   return constructRouteFromSegments(pathSegments);
+}
+ 
+export function parseActivePathname() {
+  const pathname = getActivePathname();
+  return extractPathnameSegments(pathname);
 }
