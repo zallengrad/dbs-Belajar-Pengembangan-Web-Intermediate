@@ -17,5 +17,19 @@ export default class App {
    
     this.#content.innerHTML = await page.render();
     await page.afterRender();
+
+    if(!document.startViewTransition) {
+      this.#content.innerHTML = await page.render();
+      await page.afterRender();
+
+      return;
+    }
+
+        // Update DOM with view transition
+        document.startViewTransition(async () => {
+          this.#content.innerHTML = await page.render();
+          await page.afterRender();
+        });
+
   }
 }
